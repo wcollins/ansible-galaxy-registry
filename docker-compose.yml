@@ -1,0 +1,29 @@
+---
+services:
+  galaxy_ng:
+    image: pulp/pulp-galaxy-ng:latest
+    container_name: galaxy_ng
+    ports:
+      - "8080:80"
+    volumes:
+      - ./galaxy_ng/settings:/etc/pulp:Z
+      - ./galaxy_ng/pulp_storage:/var/lib/pulp:Z
+      - ./galaxy_ng/pgsql:/var/lib/pgsql:Z
+      - ./galaxy_ng/containers:/var/lib/containers:Z
+    devices:
+      - /dev/fuse
+    environment:
+      - PULP_CONTENT_ORIGIN=http://localhost:8080
+      - PULP_ANSIBLE_API_HOSTNAME=http://localhost:8080
+      - PULP_GALAXY_REQUIRE_CONTENT_APPROVAL=false
+      - PULP_GALAXY_COLLECTION_SIGNING_SERVICE=
+      - PULP_ALLOWED_EXPORT_PATHS=/tmp
+      - PULP_ALLOWED_IMPORT_PATHS=/tmp
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/pulp/api/v3/status/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+    restart: unless-stopped
+...

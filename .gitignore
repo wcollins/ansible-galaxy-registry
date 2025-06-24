@@ -36,3 +36,10 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Certificates and private keys
+*.key
+*.crt
+*.csr
+*.pem
+galaxy_ng/settings/certs/

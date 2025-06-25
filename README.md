@@ -24,8 +24,8 @@ docker-compose up -d
 ./scripts/build-collection.sh
 ```
 
-```bash
 5. Upload community.docker collection to private Galaxy
+```bash
 ./scripts/upload-collection.sh
 ```
 

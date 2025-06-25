@@ -1,42 +1,53 @@
-# Private Ansible Galaxy Registry - Demo
-A complete, ready-to-use private Ansible Galaxy NG setup for demonstrations and testing. Simply clone and run with docker-compose.
+# 🚀 Private Ansible Galaxy Registry - Demo
+A complete, ready-to-use private [Ansible Galaxy NG](https://github.com/ansible/galaxy_ng) setup for demonstrations and testing. Simply clone and run with docker-compose. This project was created to validate and demonstrate [private registry support in torero v1.3.0](https://docs.torero.dev/en/latest/releasenotes/#torero-130).
 
 ## Quick Start
+
+1. Clone Repository
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/ansible-galaxy-registry.git
-cd ansible-galaxy-registry
+git clone https://github.com/yourusername/ansible-galaxy-registry.git \
+    && cd ansible-galaxy-registry
+```
 
-# Start Galaxy NG
+2. Start Galaxy NG
+```bash
 docker-compose up -d
+```
 
-# Initialize Galaxy NG (wait ~30 seconds after starting)
+3. Initialize Galaxy NG (wait ~30 seconds after starting)
+```bash
 ./scripts/init-galaxy.sh
+```
 
-# Download community.docker collection
+4. Download community.docker collection
+```bash
 ./scripts/build-collection.sh
+```
 
-# Upload community.docker collection to private Galaxy
+```bash
+5. Upload community.docker collection to private Galaxy
 ./scripts/upload-collection.sh
 ```
 
-## Configuring _torero_
+### Configuring _torero_
+You can find documentation for installing torero [here.](https://docs.torero.dev/en/latest/installation/) Following installation, you can follow the following steps:
+
 1. Create repository reference in torero's data store _(this repository is public)_:
 ```bash
 torero create repository ansible-galaxy-registry --url https://github.com/wcollins/ansible-galaxy-registry.git 
 ```
 
-2. Create secret within torero application, containing the password for our private Galaxy Registry:
+1. Create secret within torero application, containing the password for our private Galaxy Registry:
 ```bash
 torero create secret  galaxy --prompt-value
 ```
 
-3. Create Ansible Galaxy registry reference in torero's data store:
+1. Create Ansible Galaxy registry reference in torero's data store:
 ```bash
 torero create registry ansible-galaxy galaxy-private --url 'http://localhost:8080' --username admin --password-name galaxy
 ```
 
-4. Create simple test service:
+1. Create simple test service:
 ```bash
 torero create service ansible-playbook example-playbook --repository ansible-galaxy-registry --playbook example-playbook.yml --registry galaxy-private
 ```

@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Ansible
+*.retry
+ansible_collections/
+
+# Galaxy NG data (except settings)
+galaxy_ng/pulp_storage/*
+galaxy_ng/pgsql/*
+galaxy_ng/containers/*
+!galaxy_ng/pulp_storage/.gitkeep
+!galaxy_ng/pgsql/.gitkeep
+!galaxy_ng/containers/.gitkeep
+
+# Built collections
+collections/*.tar.gz
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Certificates and private keys
+*.key
+*.crt
+*.csr
+*.pem
+galaxy_ng/settings/certs/

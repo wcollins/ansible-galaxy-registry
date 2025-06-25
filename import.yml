@@ -1,0 +1,25 @@
+repositories:
+    - name: ansible-galaxy-registry
+      url: https://github.com/wcollins/ansible-galaxy-registry.git
+      reference: main
+services:
+    - name: example-playbook
+      type: ansible-playbook
+      playbooks:
+        - example-playbook.yml
+      working-directory: ""
+      repository: ansible-galaxy-registry
+registries:
+    - name: default-pypi
+      type: pypi
+      url: https://pypi.org/simple
+      default: true
+    - name: galaxy-private
+      type: ansible-galaxy
+      url: http://localhost:8080
+      default: false
+      username: admin
+      password-name: galaxy
+secrets:
+    - name: galaxy
+      value: lYA4TcNmEbhmi9mTiu2HbRTezKR9LRCvcvjGvER37Nw=.HScvoUyLMJUC2c7YFRd+Cpz//LTiVo77ciyKeVDhPFdmb8WexH4n
